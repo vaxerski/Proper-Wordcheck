@@ -1,0 +1,7 @@
+{
+  "name": "proper-wordcheck",
+  "description": "Wordcheck, but made properly.",
+  "main": "main.js",
+  "author": "vaxerski",
+  "version": "1.0"
+}
