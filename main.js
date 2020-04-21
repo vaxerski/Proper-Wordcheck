@@ -3,7 +3,7 @@ const editText = require("./editText.js");
 
 var badWords = [];
 
-exports.addBadWords = function addBadWords(words){
+function addBadWords(words){
     if(!Array.isArray(words)) return -1;
 
     for(var i = 0; i < words.length; i++){
@@ -11,13 +11,13 @@ exports.addBadWords = function addBadWords(words){
     }
 }
 
-exports.addBadWord = function addBadWord(word){
+function addBadWord(word){
     if(Array.isArray(word)) return -1;
 
     badWords.push(word);
 }
 
-exports.removeBadWord = function removeBadWord(word){
+function removeBadWord(word){
     if(Array.isArray(word))
         return -1;
 
@@ -27,7 +27,7 @@ exports.removeBadWord = function removeBadWord(word){
     badWords.splice(index, 1);
 }
 
-exports.checkForWord = function checkForWord(content) {
+function checkForWord(content) {
     for(var i = 0; i < badWords.length; i++){
         var word = badWords[i];
 
@@ -54,3 +54,10 @@ function test(){                                            //testing the code h
         console.log("pass!");
     else console.log("fail.");
 }
+
+// -- Exports -- //
+
+exports.checkForWord = checkForWord;
+exports.addBadWord = addBadWord;
+exports.addBadWords = addBadWords;
+exports.removeBadWord = removeBadWord;
