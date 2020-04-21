@@ -1,7 +1,25 @@
 {
   "name": "proper-wordcheck",
-  "description": "Wordcheck, but made properly.",
+  "version": "1.0.4",
+  "description": "Check for words properly, easily and fast.",
   "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaxerski/Proper-Wordcheck.git"
+  },
+  "keywords": [
+    "wordcheck",
+    "fast",
+    "easy",
+    "simple"
+  ],
   "author": "vaxerski",
-  "version": "1.0"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vaxerski/Proper-Wordcheck/issues"
+  },
+  "homepage": "https://github.com/vaxerski/Proper-Wordcheck#readme"
 }
