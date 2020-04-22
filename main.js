@@ -50,14 +50,14 @@ function addToWhitelist(word){
 }
 
 function test(){                                                //testing the code hehe
-    allowUnicode(false);
+    allowUnicode(true);
 
-    whitelist.add("bloody");
-    var cont = "hey this is bl111oooo0oody bad, like hellll.";
-    addBadWord("bloody");
+    whitelist.add("helvete");
+    var cont = "hey this is bl111oooo0oody bad, like helllll.";
+    addBadWord("mać");
     addBadWords(["hell", "heck"]); 
-    console.log(badWords);
     removeBadWord("heck");
+    console.log(badWords);
 
     if(checkForWord(cont))
         console.log("pass!");

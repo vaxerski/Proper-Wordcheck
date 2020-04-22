@@ -5,7 +5,7 @@ function TL(string){
 
 function RD(string){
     if(string == undefined) throw "removeDuplicates: invalid string.";
-    return string.replace(/[^\w\s]|(.)(?=\1)/gi, "");
+    return string.replace(/(.)(?=\1)/gi, "");
 }
 
 module.exports = {
