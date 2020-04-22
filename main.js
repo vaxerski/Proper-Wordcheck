@@ -1,50 +1,59 @@
-const help = require("./help.js");
-const editText = require("./editText.js");
+const editText = require("./core/editText");
+const wordcheck = require("./core/wordchecking");
 
-var badWords = [];
+// -- Globals -- //
+
+var vUnicode = false;
+var badWords = new Set();
+var whitelist = new Set();
+
+// ------------- //
 
 function addBadWords(words){
-    if(!Array.isArray(words)) return -1;
+    if(!Array.isArray(words)) throw "addbadWords() takes an array, try addBadWord() for a single-word equivalent.";
 
-    for(var i = 0; i < words.length; i++){
-        addBadWord(words[i]);
-    }
+    words.forEach(w => {
+        badWords.add(w);
+    });
 }
 
 function addBadWord(word){
-    if(Array.isArray(word)) return -1;
+    if(Array.isArray(word)) throw "addBadWord() takes one word, try addBadWords() for an array equivalent.";
 
-    badWords.push(word);
+    badWords.add(word);
 }
 
 function removeBadWord(word){
-    if(Array.isArray(word))
-        return -1;
+    if(Array.isArray(word)) throw "removeBadWord() takes one word as an argument, not an array.";
 
-    var index = help.findArrIndex(word, badWords);
-    if(index == -1) return -1;
+    if(!badWords.has(word)) throw "removeBadWord() failed: no such word.";
 
-    badWords.splice(index, 1);
+    badWords.delete(word);
+}
+
+function allowUnicode(state){
+    vUnicode = state;                                           // unicode support is not fully done yet.
 }
 
 function checkForWord(content) {
-    for(var i = 0; i < badWords.length; i++){
-        var word = badWords[i];
-
-        content = editText.toLetters(content);                  // remove non-letters, so Ex. "b2l2o0o0d0y" -> "bloody"
-        content = editText.removeDuplicates(content);           // remove duplicates, so Ex. "bloooooooooodyyyyyyyyy" -> "blody"
-        content = content.toLowerCase();
-    
-        word = editText.removeDuplicates(word);                 //why? cuz if a word has duplicate letters it wouldn't match. Ex. "bl2oo2dy" -> "bloody" -> "blody"
-        word = word.toLowerCase();                              //so we do this to check against "blody" instead.
-    
-        if (content.indexOf(`${word}`) != -1) return true;      //if the modified content has the word, return true.
+    if(vUnicode){
+        return wordcheck.checkUnicode(content, badWords, whitelist);
+    }else{
+        return wordcheck.checkStandard(content, badWords, whitelist);
     }
-    return false;
 }
 
-function test(){                                            //testing the code hehe
-    var cont = "hey this is bl111oooo0oody bad";
+function addToWhitelist(word){
+    if(Array.isArray(word)) throw "addToWhitelist() takes one word as an argument.";
+
+    whitelist.add(word);
+}
+
+function test(){                                                //testing the code hehe
+    allowUnicode(false);
+
+    whitelist.add("bloody");
+    var cont = "hey this is bl111oooo0oody bad, like hellll.";
     addBadWord("bloody");
     addBadWords(["hell", "heck"]); 
     console.log(badWords);
@@ -55,9 +64,11 @@ function test(){                                            //testing the code h
     else console.log("fail.");
 }
 
-// -- Exports -- //
+// ------ Exports ------ //
 
-exports.checkForWord = checkForWord;
-exports.addBadWord = addBadWord;
-exports.addBadWords = addBadWords;
-exports.removeBadWord = removeBadWord;
+exports.checkForWord    = checkForWord;
+exports.addBadWord      = addBadWord;
+exports.addBadWords     = addBadWords;
+exports.removeBadWord   = removeBadWord;
+exports.allowUnicode    = allowUnicode;
+exports.addToWhitelist  = addToWhitelist;

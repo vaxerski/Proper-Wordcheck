@@ -1,8 +1,10 @@
 function TL(string){
+    if(string == undefined) throw "toLetters: invalid string.";
     return string.replace(/[^a-zA-Z]+/g, '');
 }
 
 function RD(string){
+    if(string == undefined) throw "removeDuplicates: invalid string.";
     return string.replace(/[^\w\s]|(.)(?=\1)/gi, "");
 }
 
