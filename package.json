@@ -1,6 +1,6 @@
 {
   "name": "proper-wordcheck",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Check for words properly, easily and fast.",
   "main": "main.js",
   "scripts": {

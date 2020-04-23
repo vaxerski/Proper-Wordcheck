@@ -61,7 +61,7 @@ Check a string (content) for containing any of the bad words.<br/>
 ```javascript
 allowUnicode(state);
 ```
-Allow or disallow unicode. Makes the checks a bit worse but avoids false positives (See ![Issue #1](https://github.com/vaxerski/Proper-Wordcheck/issues/1))<br/>
+Allow or disallow unicode. Makes the checks a bit worse but avoids false positives (See [Issue #1](https://github.com/vaxerski/Proper-Wordcheck/issues/1))<br/>
 **Returns:** nothing.<br/><br/>
 
 ```javascript
