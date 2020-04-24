@@ -53,7 +53,7 @@ function test(){                                                //testing the co
     allowUnicode(true);
 
     whitelist.add("helvete");
-    var cont = "hey this is bl111oooo0oody bad, like helllll.";
+    var cont = "hey this is bl111oooo0oody bad, like h3ll.";
     addBadWord("mać");
     addBadWords(["hell", "heck"]); 
     removeBadWord("heck");
